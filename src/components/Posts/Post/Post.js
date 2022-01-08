@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
   Card,
   CardActions,
@@ -11,10 +12,27 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 import useStyles from "./styles";
-import moment from "moment";
+import { setSelectedPostId } from "../../../features/Posts/editPostSlice";
+import { remove } from "../../../features/Posts/deletePostSlice";
+import { updateLikePost } from "../../../features/Posts/editPostSlice";
+import { useDispatch } from "react-redux";
 
 const Post = ({ post }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const handleEditClick = () => {
+    dispatch(setSelectedPostId(post._id));
+  };
+
+  const handleDeleteClick = () => {
+    dispatch(remove(post._id));
+  };
+
+  const handleLikeClick = () => {
+    dispatch(updateLikePost(post._id));
+  };
+
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -29,7 +47,10 @@ const Post = ({ post }) => {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-        <Button style={{ color: "#FFFFFF" }} size="small" onClick={() => {}}>
+        <Button
+          style={{ color: "#FFFFFF" }}
+          size="small"
+          onClick={handleEditClick}>
           <MoreHorizIcon fontSize="medium" />
         </Button>
       </div>
@@ -38,18 +59,21 @@ const Post = ({ post }) => {
           {post.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
+      <Typography className={classes.title} variant="h5" gutterBottom>
+        {post.title}
+      </Typography>
       <CardContent>
-        <Typography className={classes.title} variant="h5" gutterBottom>
+        <Typography variant="body2" color="textSecondary" component="p">
           {post.message}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button size="small" color="primary" onClick={handleLikeClick}>
           <ThumbUpAltIcon fontSize="small" />
-          Like
+          Like &nbsp;
           {post.likeCount}
         </Button>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button size="small" color="primary" onClick={handleDeleteClick}>
           <DeleteIcon fontSize="small" />
           Delete
         </Button>

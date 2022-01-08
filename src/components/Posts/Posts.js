@@ -6,8 +6,8 @@ import useStyles from "./styles";
 const Posts = () => {
   const classes = useStyles();
   const posts = useSelector((state) => state.posts.items, shallowEqual);
-  console.log(posts);
-  return !posts.length ? (
+  const isLoading = useSelector((state) => state.posts.loading);
+  return isLoading ? (
     <CircularProgress />
   ) : (
     <Grid

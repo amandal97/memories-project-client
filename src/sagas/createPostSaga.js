@@ -1,6 +1,6 @@
 import { call, put, select, takeLatest } from "redux-saga/effects";
 import { createPost } from "../api";
-import { setPosts } from "../features/Posts/fetchPostSlice";
+import { setPosts } from "../features/Posts/postSlice";
 import { setLoading } from "../features/Posts/createPostSlice";
 
 function* handleCreatePost(action) {
@@ -10,7 +10,7 @@ function* handleCreatePost(action) {
     const posts = yield select((state) => state.posts.items);
     yield put(setPosts([...posts, action.payload]));
   } catch (err) {
-    console.log(err.message);
+    console.error(err);
     yield put(setLoading(false));
   }
 }

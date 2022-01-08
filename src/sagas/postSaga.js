@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { fetchPosts } from "../api";
-import { setPosts, setLoading } from "../features/Posts/fetchPostSlice";
+import { setPosts, setLoading } from "../features/Posts/postSlice";
 
 function* handlePostsData() {
   try {
@@ -8,7 +8,7 @@ function* handlePostsData() {
     yield put(setLoading(false));
     yield put(setPosts(response.data));
   } catch (err) {
-    console.log(err.message);
+    console.error(err);
     yield put(setLoading(false));
   }
 }

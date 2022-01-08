@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import memories from "./images/memories.png";
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
-import { fetchAllPosts } from "./features/Posts/fetchPostSlice";
+import { fetchAllPosts } from "./features/Posts/postSlice";
 import useStyles from "./styles";
 
 const App = () => {
@@ -31,6 +31,7 @@ const App = () => {
       <Grow in>
         <Container>
           <Grid
+            className={classes.containerGrid}
             container
             justifyContent="space-between"
             alignItems="stretch"
