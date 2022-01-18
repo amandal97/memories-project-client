@@ -5,10 +5,10 @@ import { setLoading } from "../features/Posts/createPostSlice";
 
 function* handleCreatePost(action) {
   try {
-    yield call(createPost, action.payload);
+    const response = yield call(createPost, action.payload);
     yield put(setLoading(false));
     const posts = yield select((state) => state.posts.items);
-    yield put(setPosts([...posts, action.payload]));
+    yield put(setPosts([...posts, response.data]));
   } catch (err) {
     console.error(err);
     yield put(setLoading(false));

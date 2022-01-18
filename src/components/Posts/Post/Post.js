@@ -22,6 +22,7 @@ const Post = ({ post }) => {
   const dispatch = useDispatch();
 
   const handleEditClick = () => {
+    console.log("post id ", post._id);
     dispatch(setSelectedPostId(post._id));
   };
 
